@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
-//use App\Http\Requests\Store;
+use App\Http\Requests\Store;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -108,16 +108,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Post $post)
+    public function update(Store $request,Post $post)
     {
         //     
-     $data = $request->validate();
-     dd($data);    
-    //$data->title = $request->input('title');
-    //$data->description = $request->input('description');
+    $data = $request->validated();
     $post = $post->update($data);
+   //$data->title = $request->input('title');
+    //$data->description = $request->input('description');
     //$data->update();
-      return redirect('/index')->withMessage('successfully published');
+      //return redirect('/index')->withMessage('successfully published');
     }
 
     /**
