@@ -47,7 +47,7 @@
 <td>
 <form action="/posts/delete/{{ $data->id }}" method="post" class="pull-right">
   @csrf
-  <button type="submit" class="btn btn-danger form-control">delete</button>  
+  <td><a href="/posts/delete/{{$data->id}}" class="btn btn-primary">delete</button>  
   </td>
 </tbody>
 @endforeach

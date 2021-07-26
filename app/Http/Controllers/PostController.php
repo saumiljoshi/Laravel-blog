@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+//use App\Http\Requests\Store;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -93,7 +94,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-      
+  
         //$post = Auth::user('id');
         $data = Post::find($id);
         //dd($data);
@@ -107,13 +108,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,Post $post)
     {
-        // 
-    $data = Post::find($request->id);
-    $data->title = $request->input('title');
-    $data->description = $request->input('description');
-    $data->update();
+        //     
+     $data = $request->validate();
+     dd($data);    
+    //$data->title = $request->input('title');
+    //$data->description = $request->input('description');
+    $post = $post->update($data);
+    //$data->update();
       return redirect('/index')->withMessage('successfully published');
     }
 
@@ -126,5 +129,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/index');
     }
 }

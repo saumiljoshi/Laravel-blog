@@ -18,7 +18,6 @@
     <form method="POST" action="/add">
         @csrf 
         <div>
-      <label>Comment</label></div>
       <input type="text" name="title" value="{{$data->title}}" required />
       <div>
       <textarea name="comment" placeholder="comment here" required></textarea>
