@@ -6,32 +6,16 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+     <li class="nav-item">
+        <a class="nav-link" href="/new-post">Add new post</a>
       </li>
       </ul>
-      <ul>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-  </div>
+       </div>
 </nav>  
 <table class="table table table-striped table">
 <tr>
 <thead>
-    <th><b>Username</b></th>
+    <th><b>User</b></th>
     <th><b>Titles</b></th>
     <th><b>description</b></th>
     <th colspan="2">Action</th>
@@ -43,11 +27,11 @@
 <td>{{$data->user_id}}</td>
 <td><a href={{'comment/create/'.$data->id}}>{{$data->title}}</a></td>
 <td>{{$data->description}}</td>
-<td><a href="/posts/edit/{{$data->id}}" class="btn btn-primary">Edit</a></td>
+<td><a href="/posts/edit/{{$data->id}}" class="btn btn-danger">Edit</a></td>
 <td>
 <form action="/posts/delete/{{ $data->id }}" method="post" class="pull-right">
   @csrf
-  <td><a href="/posts/delete/{{$data->id}}" class="btn btn-primary">delete</button>  
+  <td><a href="/posts/delete/{{$data->id}}" class="btn btn-success">delete</button>  
   </td>
 </tbody>
 @endforeach

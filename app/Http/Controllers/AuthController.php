@@ -16,7 +16,7 @@ class AuthController extends Controller
     public function Session(Request $request){
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-          return redirect('home');
+          return redirect('/index');
     
         }
         else
@@ -60,7 +60,7 @@ class AuthController extends Controller
             'Zip' => $request['Zip'], 
           ]);
            Auth::login($user);
-           return redirect('/');
+           return redirect('/index');
     
       }
         public function logout()

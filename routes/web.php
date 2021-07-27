@@ -31,13 +31,13 @@ Route::view('post','post');
    // return view('welcome');
 //});
 Route::get('/', [PostController::class,'index']);
-Route::get('/home', [PostController::class,'index'])->name('home');
+Route::get('/index', [PostController::class,'index'])->name('home');
 Route::middleware(['auth'])->group(function(){
     Route::get('new-post',[PostController::class,'create']);
     Route::post('new-post',[PostController::class,'store']);
-    Route::get('index',[PostController::class,'post']);
+    Route::get('show',[PostController::class,'post']);
     Route::get('posts/edit/{edit}',[PostController::class,'edit']);
-    Route::post('/update',[PostController::class,'update']);
+    Route::post('/update',[PostController::class,'update']);    
     Route::get('posts/delete/{delete}',[PostController::class,'destroy']);
     Route::get('comment/create/{id}',[CommentController::class,'create']);
     Route::post('/add',[CommentController::class,'store']);

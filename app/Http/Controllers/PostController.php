@@ -22,7 +22,7 @@ class PostController extends Controller
         //$posts = Post::where('active','1')->orderby('description');
         $user = Auth::user();
         //$title = 'Latest posts';
-        return view('home',['user' => $user]);
+        return view('index',['user' => $user]);
     }
 
     /**
@@ -55,17 +55,13 @@ class PostController extends Controller
         $post->title = $request->get('title');
         $post->description = $request->get('description');
 
-        $duplicate = Post::where('slug', $post->slug)->first();
-        if($duplicate){
-            return redirect('new-post')->withErrors('title already exists.')->withInput();
-        }
-        $post->user_id = $request->user()->id;
+       $post->user_id = $request->user()->id;
         if ($request->has('publish')) {
             $post->active = 0;
             $message = 'Post published successfully';
           } 
         $post->save();
-        return redirect('/index' . $post->slug)->withMessage($message); 
+        return redirect('/show' . $post->slug)->withMessage($message); 
     }
 
     /**
@@ -77,7 +73,7 @@ class PostController extends Controller
     public function post(){
 
        $post = Post::all();
-       return view('Post/index',['post'=>$post]);
+       return view('Post/show',['post'=>$post]);
     
     }
    
@@ -108,16 +104,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Store $request,Post $post)
+    public function update(Request $request,Post $post)
     {
-        //     
-    $data = $request->validated();
-    $post = $post->update($data);
-   //$data->title = $request->input('title');
-    //$data->description = $request->input('description');
-    //$data->update();
-      //return redirect('/index')->withMessage('successfully published');
+     /*$data = $request->validate([
+        
+    ]);*/
+     
+     //
+     //
+     //$data->update();
+     //$post = $post->update($data);
+    
+        $post->user_id=$request->user()->id;
+        $post->title=$request->title;
+        $post->Description=$request->description;
+        $post->save();
+        return redirect('/show');
+        
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -130,6 +135,6 @@ class PostController extends Controller
         //
         $post = Post::find($id);
         $post->delete();
-        return redirect('/index');
+        return redirect('/show');
     }
 }

@@ -14,13 +14,15 @@
                 
                 
             </div>
-      <h3>Add comment here</h3>
     <form method="POST" action="/add">
         @csrf 
         <div>
-      <input type="text" name="title" value="{{$data->title}}" required />
+       <h4>{{$data->description}}</h4>
+       <h3>Add comment here</h3>
+      <input type="text" name="post" value="{{$data->id}}" required/>
+      </div>
       <div>
-      <textarea name="comment" placeholder="comment here" required></textarea>
+      <textarea name="comments" placeholder="comment here" required></textarea>
     </div>
     <button class="btn btn-primary" name="publish" required>publish</button>
     <li>
