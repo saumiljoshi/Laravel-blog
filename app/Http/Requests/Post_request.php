@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class User extends FormRequest
+class Post_request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class User extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,9 +23,8 @@ class User extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            
-        ];
-        return $rules;
+            return [
+             
+            ];
     }
 }

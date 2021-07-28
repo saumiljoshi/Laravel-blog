@@ -23,20 +23,6 @@ class Store extends FormRequest
      */
     public function rules()
     {
-        return [
-            $rules = 
-            [
-                'title'=>
-                [
-                    'required',
-                    Rule::unique('posts'),
-                ],
-                'description'=>
-                [
-                    'required',
-                ],
-            ],
-        ];
-       return $rules;
+       
     }
 }

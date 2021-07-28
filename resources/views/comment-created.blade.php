@@ -20,11 +20,10 @@
        <h4>{{$data->description}}</h4>
        <li>{{$data->created_at->format('M d,Y \a\t h:i a')}}</li>
        <h3>Add comment here</h3>
-      <input type="text" name="post" value="{{$data->id}}" required/>
+      <input type="hidden" name="post" value="{{$data->id}}" required/>
 
       <textarea name="comments" placeholder="comment here" required></textarea>
    <button class="btn btn-primary" name="publish" required>publish</button>
-        <a class="nav-link ml-auto" href="/logout">Logout</a>
 </div>
     </form>
 </body>

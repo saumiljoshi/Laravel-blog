@@ -19,7 +19,7 @@
 <tbody>
 @foreach($post as $data)
 <td>{{$data->user_id}}</td>
-<td><a href={{'comment/create/'.$data->id}}>{{$data->title}}</a></td>
+<td><a href={{'comment/posts/'.$data->id}}>{{$data->title}}</a></td>
 <td><a href="comment-index">{{$data->description}}</a></td>
 <td><a href="/posts/edit/{{$data->id}}" class="btn btn-danger">Edit</a></td>
 <td>

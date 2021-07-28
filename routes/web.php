@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('posts/edit/{edit}',[PostController::class,'edit']);
     Route::post('/update/posts/{post}',[PostController::class,'update']);   
     Route::get('posts/delete/{delete}',[PostController::class,'destroy']);
-    Route::get('comment/create/{id}',[CommentController::class,'create']);
+    Route::get('comment/posts/{id}',[CommentController::class,'create']);
     Route::get('comment-index',[CommentController::class,'index']);
     Route::post('/add',[CommentController::class,'store']);
 });
