@@ -106,21 +106,14 @@ class PostController extends Controller
      */
     public function update(Request $request,Post $post)
     {
-     /*$data = $request->validate([
-        
-    ]);*/
-     
-     //
-     //
-     //$data->update();
-     //$post = $post->update($data);
-    
-        $post->user_id=$request->user()->id;
-        $post->title=$request->title;
-        $post->Description=$request->description;
-        $post->save();
+        $data=$request->validate([
+          'title' => 'required',
+          'description' => 'required',
+        ]);
+       
+        $post->update($data);      
         return redirect('/show');
-        
+               
     }
     
 

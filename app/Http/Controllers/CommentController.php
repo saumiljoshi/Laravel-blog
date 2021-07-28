@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 class CommentController extends Controller
 {
     public function index(){
-
+    $comment = Comment::all();
+     return view('comment-index',['comments'=>$comment]);
     }
     public function create($id){
 
@@ -17,34 +18,19 @@ class CommentController extends Controller
        return view('comment-created',['data' => $data]);
     }
     public function Validator(array $data){
-        //return Validator::make($data,[
-          // 'title' => [],
-           //'comment' => ['required'],
-        //]);
+        return Validator::make($data,[
+           'title' => ['required|unique:comments'],
+           'comment' => ['required'],
+        ]);
     }
-    public function store(Request $request){
+    public function store(Request $request,Comment $comment){
     
         $comment=new Comment;
         $comment->user = $request->user()->id; 
         $comment->post = $request->post;
         $comment->comments = $request->comments;
         $comment->save();
-        return redirect('/index')->withMessage('Comment published');
-    //  $input['description'] = $request->input('post');
-    //      $input['user'] = $request->user()->id;    
-    //      $input['comment'] = $request->input('comments');
-    //  dd($input);
-    //      Comment::create($input);
-    //return redirect($input)->with('message', 'Comment published');
-
-      // $data = $request->validate([
-        //    'description' => 'required', 
-          //  'comment'=> 'required',
-        //]);
-        //$comment = Comment::create([$data]);
-        //dd($comment);
-        
-         
+        return redirect('/show');     
     }
-
+   
 }

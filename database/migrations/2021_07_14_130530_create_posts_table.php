@@ -18,11 +18,10 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title')->unique();
             $table->string('description');
-            $table->string('slug')->unique();
             $table->boolean('active');
             $table->timestamps();
            
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
            
            
         });

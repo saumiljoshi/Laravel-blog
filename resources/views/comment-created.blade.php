@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <div>
@@ -16,18 +16,16 @@
             </div>
     <form method="POST" action="/add">
         @csrf 
-        <div>
+        <div class="d-flex flex-column justify-content-center mx-auto w-25">
        <h4>{{$data->description}}</h4>
+       <li>{{$data->created_at->format('M d,Y \a\t h:i a')}}</li>
        <h3>Add comment here</h3>
       <input type="text" name="post" value="{{$data->id}}" required/>
-      </div>
-      <div>
+
       <textarea name="comments" placeholder="comment here" required></textarea>
-    </div>
-    <button class="btn btn-primary" name="publish" required>publish</button>
-    <li>
+   <button class="btn btn-primary" name="publish" required>publish</button>
         <a class="nav-link ml-auto" href="/logout">Logout</a>
-    </li>
+</div>
     </form>
 </body>
 </html>
