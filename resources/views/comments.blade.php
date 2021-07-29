@@ -10,21 +10,20 @@
 <body>
     <div>
         <table class="table table table-striped table">
-            <div class="form-group">
-                
-                
+            <div class="form-group">    
             </div>
-    <form method="POST" action="/add">
+    <form method="POST" action="/add/user">
         @csrf 
         <div class="d-flex flex-column justify-content-center mx-auto w-25">
        <h4>{{$data->description}}</h4>
        <li>{{$data->created_at->format('M d,Y \a\t h:i a')}}</li>
        <h3>Add comment here</h3>
       <input type="hidden" name="post" value="{{$data->id}}" required/>
-
+      <input type="hidden" name="user" value="{{$data->id}}" required/>
       <textarea name="comments" placeholder="comment here" required></textarea>
    <button class="btn btn-primary" name="publish" required>publish</button>
 </div>
     </form>
+    
 </body>
 </html>

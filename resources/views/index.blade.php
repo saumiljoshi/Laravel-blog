@@ -22,7 +22,7 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="/profile" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{$user->name}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,20 +30,13 @@
               <li><a class="dropdown-item" href="/new-post">Add New Post</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
   <div class="d-flex flex-column justify-content-center mx-auto w-25">
     <h4>your blog posts</h4>
-    <a href="/new-post" class="btn btn-primary">Add new post</a> 
+    <a href="/new-post" class="btn btn-info">Add new post</a> 
    @if(!is_null($user) > 0)
   <table class="table table-striped">
       <a class="nav-link ml-auto" href="/logout">Logout</a>

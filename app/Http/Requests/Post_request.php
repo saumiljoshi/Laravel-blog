@@ -13,7 +13,7 @@ class Post_request extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class Post_request extends FormRequest
     public function rules()
     {
             return [
-             
+                'user' => [
+                    'required'
+                ],
+                'post' => [
+                  'required'
+              ],
+              'comments' => [
+                'required'
+              ],
             ];
     }
 }

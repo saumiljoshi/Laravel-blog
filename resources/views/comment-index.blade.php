@@ -10,19 +10,24 @@
 </head>
 <body>
     <div class="d-flex flex-column justify-content-center mx-auto w-25">
-  <h3>All comments are placed here</h3> 
+  <h3>All comments are placed here</h3>
+  <form method="post" action=""> 
   <table class="table table table-striped table"> 
   <tr>
   <th>Posts</th>
    <th>Comments</th>
   </tr>
-  @foreach($comments as $comments)
+  @foreach($comment as $comments)
   <tbody>
   <tr> 
   <td>{{$comments->post}}</td>
    <td>{{$comments->comments}}<li>{{$comments->created_at->format('M d,Y \a\t h:i a')}}</li></td>
    @endforeach
+   
 </tr>
    </tbody>
+</table>
+</form>
+   <a href="/show">Back To Posts</a>
 </body>
 </html>

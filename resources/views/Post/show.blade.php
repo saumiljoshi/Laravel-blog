@@ -19,8 +19,8 @@
 <tbody>
 @foreach($post as $data)
 <td>{{$data->user_id}}</td>
-<td><a href={{'comment/posts/'.$data->id}}>{{$data->title}}</a></td>
-<td><a href="comment-index">{{$data->description}}</a></td>
+<td><a href="{{'/comment/posts/'.$data->id}}">{{$data->title}}</a></td>
+<td>{{$data->description}}</td>
 <td><a href="/posts/edit/{{$data->id}}" class="btn btn-danger">Edit</a></td>
 <td>
 <form action="/posts/delete/{{ $data->id }}" method="post" class="pull-right">
@@ -31,7 +31,5 @@
 @endforeach
 </tr>
 </table>
-<li>
     <a class="nav-link ml-auto" href="/logout">Logout</a>
-</li>
 </body>

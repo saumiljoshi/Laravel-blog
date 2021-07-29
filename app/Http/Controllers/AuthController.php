@@ -46,4 +46,9 @@ class AuthController extends Controller
               Auth::logout();
               return redirect('/register');
          }
+         
+        public function index(){
+          $user = User::all();
+          return view('/profile',['user'=>$user]);
+        }        
 }
