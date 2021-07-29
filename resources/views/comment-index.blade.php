@@ -17,17 +17,19 @@
   <th>Posts</th>
    <th>Comments</th>
   </tr>
-  @foreach($comment as $comments)
+  @foreach($comment as $data)
   <tbody>
   <tr> 
-  <td>{{$comments->post}}</td>
-   <td>{{$comments->comments}}<li>{{$comments->created_at->format('M d,Y \a\t h:i a')}}</li></td>
+  <td>{{$data->post}}</td>
+   <td>{{$data->comments}}<li>{{$data->created_at->format('M d,Y \a\t h:i a')}}<a href="{{'comments/delete/'.$data->id}}">delete comments</a></li></td>
    @endforeach
-   
 </tr>
    </tbody>
 </table>
 </form>
+<form method="POST" action="{{'comments/delete/'.$data->id}}">
+   @csrf
+      </form>
    <a href="/show">Back To Posts</a>
 </body>
 </html>

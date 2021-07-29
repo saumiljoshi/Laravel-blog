@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Http\Requests\Post_request;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -38,20 +39,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Post_request $request)
     {
-        $request->validate([
-            'user' => 'required',
-            'post' => 'required',
-            'comments'=>'required',
-        ]);
-
-        $comment=new Comment;
-        $comment->user=$request->user()->id;
-        $comment->post=$request->post;
-        $comment->comments=$request->comments;
-        $comment->save();
-        return redirect('/comment-index');
+       $data = $request->validated();
+      
+       $input['post'] = $request->input('post');
+       $input['user'] = $request->user()->id;
+       $input['comments'] = $request->input('comments');
+       Comment::create($input);
+       return redirect('/comment-index');
     }
 
     /**
@@ -96,6 +92,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+        return view('/comment-index');
     }
 }

@@ -24,9 +24,6 @@
   <div>  
     <input type="submit" name="update" class="btn btn-success" value="Update" required />
   </div>
-  <li>
-    <a class="nav-link ml-auto" href="/logout">Logout</a>
-</li>
       </table>
     </form>
     </body>

@@ -51,13 +51,13 @@ Route::middleware(['auth'])->group(function()
     
     //store new post;
     Route::post('new-post',[PostController::class,'store']);
-    
+    //show all posts;
     Route::get('show',[PostController::class,'post']);
-    
+    //edit all posts;
     Route::get('posts/edit/{edit}',[PostController::class,'edit']);
     
     Route::post('/update/posts/{post}',[PostController::class,'update']);   
-
+    //remove posts;
     Route::get('posts/delete/{delete}',[PostController::class,'destroy']);
     
     //comments section 
@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function()
     //add comments section 
     Route::post('/add/user',[CommentController::class,'store']);
 
+    //remove comments section 
+    Route::get('comments/delete/{delete}',[CommentController::class,'destroy']);
 });
 
 
