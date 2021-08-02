@@ -23,7 +23,7 @@
       <textarea name="comments" placeholder="comment here" required></textarea>
    <button class="btn btn-primary" name="publish" required>publish</button>
 </div>
-
+<a href="/logout">Logout</a>
     </form>
     
 </body>

@@ -23,13 +23,24 @@ class Store extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title'=>[
+        $rules = [
+            'categories'=>[
                 'required'
+            ],
+            'title'=>[
+                'required',
+                Rule::unique('posts'),
             ],
             'description'=>[
                 'required'
             ],
-    ];
+        ];
+
+        if ($this->getMethod() == 'PUT') 
+        {
+            $rules['title'] = 'nullable';
+        }
+
+        return $rules;
     }
 }

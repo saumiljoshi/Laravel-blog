@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('title')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +14,7 @@
       @csrf
       <table class="table table table-striped table">
     <div class="form-group">
+      <input type="hidden" name="categories" value="1" required />
         <label for="name" class="col-form-label text-md-right">Title</label><br>
     <input required="required" placeholder="Enter title here" type="text" name="title" class="" value="{{$data->title}}" required/>
   </div>
@@ -24,6 +27,7 @@
   <div>  
     <input type="submit" name="update" class="btn btn-success" value="Update" required />
   </div>
+  <a href="/home" class="btn btn-success">Back to homepage</a>
       </table>
     </form>
     </body>

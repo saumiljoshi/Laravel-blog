@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Post;
-use App\Models\Comment;
-use App\Http\Requests\Post_request;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +13,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comment = Comment::all();
-
-        return view('comment-index', ['comment'=>$comment]);
-   
+       $data = Category::all();
+       return view('category', ['data' => $data]);
     }
 
     /**
@@ -26,11 +22,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $data = Post::find($id); 
-        return view('comments',['data' => $data]);
-       
+        //
     }
 
     /**
@@ -39,15 +33,9 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post_request $request)
+    public function store(Request $request)
     {
-       $data = $request->validated();
-      
-       $input['post'] = $request->input('post');
-       $input['user'] = $request->user()->id;
-       $input['comments'] = $request->input('comments');
-       Comment::create($input);
-       return redirect('/comment-index')->back();
+        //
     }
 
     /**
@@ -56,9 +44,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -69,7 +57,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Category::find($id);
+        return view('category',['data' => $data]);
     }
 
     /**
@@ -79,9 +68,13 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+
+    $category->name = $request->get('name');
+    $category->description = $request->get('description');
+    $category->save();
+    return redirect('/home');
     }
 
     /**
@@ -92,9 +85,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        
-        $comment->delete();
-        return redirect('/comment-index');
+        //
     }
 }

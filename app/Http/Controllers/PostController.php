@@ -19,7 +19,7 @@ class PostController extends Controller
      public function index()
     {
 
-        //$posts = Post::where('active','1')->orderby('description');
+        //
         $user = Auth::user();
         //$title = 'Latest posts';
         return view('index',['user' => $user]);
@@ -31,8 +31,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
-        
+    {   
        if($request->user()->can_post()){
            return view('Post.create');
        }
@@ -48,20 +47,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
+        $data = $request->validated();
         
         $post = new Post();
+        $post->categories = $request->get('categories');
         $post->title = $request->get('title');
         $post->description = $request->get('description');
-
        $post->user_id = $request->user()->id;
         if ($request->has('publish')) {
             $post->active = 0;
             $message = 'Post published successfully';
           } 
         $post->save();
-        return redirect('/show' . $post->slug)->withMessage($message); 
+        return redirect('/home'); 
     }
 
     /**
@@ -70,16 +70,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function post(){
-
+    public function post()
+    {
+       
        $post = Post::all();
-       return view('Post/show',['post'=>$post]);
+       return view('home',['post' => $post]);
     
     }
    
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -93,8 +94,7 @@ class PostController extends Controller
   
         //$post = Auth::user('id');
         $data = Post::find($id);
-        //dd($data);
-        return view('Post/edit',['data'=>$data]);
+        return view('Post.edit',['data'=>$data]);
     }
 
     /**
@@ -104,13 +104,20 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Store $request,Post $post)
+    public function update(Request $request,Post $post)
     {
-        $data=$request->validated();
-       
-        $post->update($data);      
-        return redirect('/show');
-               
+        
+        $post->categories = $request->get('categories');
+        $post->title = $request->get('title');
+        $post->description = $request->get('description');
+        $post->user_id = $request->user()->id;
+        if($request->has('publish')) 
+        { 
+            $post->active = 0;
+            $message = 'Post published successfully';
+        } 
+        $post->save();
+        return redirect('/home')->with('Post updated successfully');       
     }
     
 
@@ -123,8 +130,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        
         $post = Post::find($id);
         $post->delete();
-        return redirect('/show');
+        return redirect('/home');
     }
 }

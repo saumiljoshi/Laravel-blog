@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SaveController;
 use App\Http\Controllers\PostController;
 use App\Models\User;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ActionController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,21 +29,23 @@ Route::get('/register',[AuthController::class,'register']);
 Route::post('/register',[AuthController::class,'create']);
 
 //home file;
-Route::get('/',[HomeController::class,'GetData']);
-Route::view('post','post');
+Route::get('/',[HomeController::class,'index']);
+Route::get('home',[PostController::class,'post']);
 
 
 
 //Route::get('/', function () {
-   // return view('welcome');
+  //  return view('welcome');
 //});
-
 
 Route::middleware(['auth'])->group(function()
 {
     //show user profile;
     Route::get('/index', [PostController::class,'index']);
-    Route::get('profile',[AuthController::class,'index']);
+    Route::get('/category/edit/{edit}',[CategoryController::class,'edit']);
+    Route::post('/update/category/{category}',[CategoryController::class,'update']);
+
+    Route::get('/profile',[AuthController::class,'index']);
      
     //create new post;
     Route::get('new-post',[PostController::class,'create']);
@@ -52,7 +53,7 @@ Route::middleware(['auth'])->group(function()
     //store new post;
     Route::post('new-post',[PostController::class,'store']);
     //show all posts;
-    Route::get('show',[PostController::class,'post']);
+    Route::get('show',[PostController::class,'show']);
     //edit all posts;
     Route::get('posts/edit/{edit}',[PostController::class,'edit']);
     

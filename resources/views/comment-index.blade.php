@@ -31,5 +31,6 @@
    @csrf
       </form>
    <a href="/show">Back To Posts</a>
+   
 </body>
 </html>
