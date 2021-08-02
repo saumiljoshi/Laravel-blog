@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function()
     Route::get('comment/posts/{id}',[CommentController::class,'create']);
     
     // show comments on posts 
-    Route::get('comment-index',[CommentController::class,'index']);
+    Route::get('comment-index',[CommentController::class,'index'])->name('comments');
     
     //add comments section 
     Route::post('/add/user',[CommentController::class,'store']);

@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('title')
+@endsection
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
     <form method="POST" action="/add/user">
         @csrf 
         <div class="d-flex flex-column justify-content-center mx-auto w-25">
-       <h4>{{$data->description}}</h4>
+       <p>{{$data->description}}</p>
        <li>{{$data->created_at->format('M d,Y \a\t h:i a')}}</li>
        <h3>Add comment here</h3>
       <input type="hidden" name="post" value="{{$data->id}}" required/>
@@ -23,7 +27,7 @@
       <textarea name="comments" placeholder="comment here" required></textarea>
    <button class="btn btn-primary" name="publish" required>publish</button>
 </div>
-<a href="/logout">Logout</a>
+<a href="/home">homepage</a>
     </form>
     
 </body>

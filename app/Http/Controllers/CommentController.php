@@ -42,12 +42,12 @@ class CommentController extends Controller
     public function store(Post_request $request)
     {
        $data = $request->validated();
-      
+     
        $input['post'] = $request->input('post');
        $input['user'] = $request->user()->id;
        $input['comments'] = $request->input('comments');
        Comment::create($input);
-       return redirect('/comment-index')->back();
+       return back();
     }
 
     /**

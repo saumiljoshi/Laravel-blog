@@ -22,7 +22,7 @@ class PostController extends Controller
         //
         $user = Auth::user();
         //$title = 'Latest posts';
-        return view('index',['user' => $user]);
+        return view('/profile',['user' => $user]);
     }
 
     /**
@@ -130,7 +130,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-        
+
         $post = Post::find($id);
         $post->delete();
         return redirect('/home');

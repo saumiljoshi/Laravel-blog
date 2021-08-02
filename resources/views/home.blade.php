@@ -50,7 +50,7 @@ There is no post till now. Login and write a new post now!!!
   @foreach( $post as $post)
     <div class="list-group">
     <div class="list-group-item">
-      <h3 autofocus="autofocus">{{ $post->title }}</a></h3><a href="/category/edit/{{$post->categories}}"><p>{{ $post->description }}</p></a>
+      <h3 autofocus="autofocus"><a href="comment/posts/{{$post->id}}">{{ $post->title }}</a></h3><a href="/category/edit/{{$post->categories}}"><p>{{ $post->description }}</p></a>
         @if(!Auth::guest() && ($post->user_id == Auth::user()->id || Auth::user()->is_admin()))
         @if($post->active == '0')
        <a href="/posts/edit/{{$post->id}}" class="btn btn-primary">Edit Post</a>
