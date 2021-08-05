@@ -9,54 +9,58 @@
   <link href="'/css/app.css'" rel="stylesheet">
   <!-- Fonts -->
   <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  {{-- <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-   { --<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> --}}
 </head>
-
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li>
-            <a href="{{ url('/') }}">Home</a>
-          </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url('/') }}">Home</a>
+        </li>
         <ul class="nav navbar-nav navbar-right">
           @if(Auth::guest())
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/login') }}">Login</a>
+        </li>
           <li>
-            <a href="{{ url('/Auth/login') }}">Login</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/register') }}">
+                register
           </li>
-          <li>
-            <a href="{{ url('/Auth/register') }}">Register</a>
+        </li>
+       @else
+         @if (Auth::user()->can_post())             
+          <a class="nav-link" href="/posts/{{Auth::user()->name}}">{{ Auth::user()->name }}</a>  
+          <a class="nav-link" href="/new-post">Add new post</a>
+          <a class="nav-link" href="/user/{{Auth::id().'/posts' }}">Admin-Section</a>  
+          <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+            @endif  
+    @endif
+</ul>
+</ul>
+</div>
+  </nav>
+      {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <span class="sr-only"><a class="nav-link" href="/logout">Logout</a></span>
           </li>
-          @else
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              @if (Auth::user()->can_post())
-              <li>
-                <a href="/new-post">Add new post</a>
-              </li>
-              <li>
-                <a href="/user/{{Auth::id().'/posts' }}">My Posts</a>
-              </li>
-              @endif
-              <li>
-                <a href="/user/{{Auth::id()}}">My Profile</a>
-              </li>
-                <li>
-                  <a href="/logout">Logout</a>
-                </li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/new-post">Add new post</a>
           </li>
-          @endif
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{$user->name}}
+            </a> --}}
+           </div>
+          </li>
         </ul>
       </div>
-    </div>
-  </nav>
+    </nav>   
   <div class="container">
     @if (Session::has('message'))
     <div class="flash alert-info">
@@ -90,12 +94,10 @@
       </div>
     </div>
     </div>
-  </div>
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"
-  integrity="sha256-Ap4KLoCf1rXb52q+i3p0k2vjBsmownyBTE1EqlRiMwA=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js" integrity="sha256-Ap4KLoCf1rXb52q+i3p0k2vjBsmownyBTE1EqlRiMwA=" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
   
-  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

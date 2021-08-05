@@ -36,7 +36,7 @@ class Store extends FormRequest
             ],
         ];
 
-        if ($this->getMethod() == 'PUT') 
+        if($this->getMethod() == 'PUT') 
         {
             $rules['title'] = 'nullable';
         }

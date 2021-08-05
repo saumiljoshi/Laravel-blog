@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Comment;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Store;
+use App\Http\Requests\PostEdited;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -16,13 +18,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
+     public function index(Post $key)
     {
 
         //
         $user = Auth::user();
         //$title = 'Latest posts';
-        return view('/profile',['user' => $user]);
+        $post = Post::all();
+       return view('profile',compact('user','key'));
     }
 
     /**
@@ -32,13 +35,8 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {   
-       if($request->user()->can_post()){
-           return view('Post.create');
-       }
-       else
-       {
-           return redirect('/')->withErrors('you have not permissions for writing post');
-       }
+       $category = Category::all();
+       return view('Post.create',['category' => $category]);
     }
 
     /**
@@ -55,11 +53,7 @@ class PostController extends Controller
         $post->categories = $request->get('categories');
         $post->title = $request->get('title');
         $post->description = $request->get('description');
-       $post->user_id = $request->user()->id;
-        if ($request->has('publish')) {
-            $post->active = 0;
-            $message = 'Post published successfully';
-          } 
+        $post->user_id = $request->user()->id;
         $post->save();
         return redirect('/home'); 
     }
@@ -72,9 +66,10 @@ class PostController extends Controller
      */
     public function post()
     {
-       
        $post = Post::all();
-       return view('home',['post' => $post]);
+       $user = User::all();
+
+       return view('home','layouts.app',compact('post','user'));
     
     }
    
@@ -91,10 +86,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-  
         //$post = Auth::user('id');
         $data = Post::find($id);
-        return view('Post.edit',['data'=>$data]);
+        $category = Category::all();
+        return view('Post.edit',compact('data', 'category'));
     }
 
     /**
@@ -104,20 +99,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Post $post)
+    public function update(PostEdited $request,Post $posts)
     {
+        $data = $request->validated();
         
-        $post->categories = $request->get('categories');
-        $post->title = $request->get('title');
-        $post->description = $request->get('description');
-        $post->user_id = $request->user()->id;
-        if($request->has('publish')) 
-        { 
-            $post->active = 0;
-            $message = 'Post published successfully';
-        } 
-        $post->save();
-        return redirect('/home')->with('Post updated successfully');       
+        $posts->save($data);
+        dd($posts);
+        return redirect('/home');      
     }
     
 
@@ -130,7 +118,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-
         $post = Post::find($id);
         $post->delete();
         return redirect('/home');

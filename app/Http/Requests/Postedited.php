@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class User extends FormRequest
+class PostEdited extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,19 @@ class User extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            
-        ];
-        return $rules;
+            return[
+                'title'=> [
+                  'required'
+                ],
+                'description' =>[
+                    'required'
+                ],
+                'categories' =>[
+                    'required'
+                ],
+                'user_id' =>[
+                    'required'
+                ],
+            ];
     }
 }

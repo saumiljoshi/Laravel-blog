@@ -16,19 +16,31 @@
         <table class="table table table-striped table">
             <div class="form-group">    
             </div>
-    <form method="POST" action="/add/user">
-        @csrf 
-        <div class="d-flex flex-column justify-content-center mx-auto w-25">
-       <p>{{$data->description}}</p>
-       <li>{{$data->created_at->format('M d,Y \a\t h:i a')}}</li>
-       <h3>Add comment here</h3>
-      <input type="hidden" name="post" value="{{$data->id}}" required/>
-      <input type="hidden" name="user" value="{{$data->id}}" required/>
-      <textarea name="comments" placeholder="comment here" required></textarea>
-   <button class="btn btn-primary" name="publish" required>publish</button>
-</div>
-<a href="/home">homepage</a>
-    </form>
+    @foreach($comment as $comments)
     
+    @endforeach
+    @foreach($data as $datas)
+    @endforeach
+    <div class="d-flex flex-column justify-content-center mx-auto w-25">
+    <div class="card" style="width: 25rem;">
+      <div class="card-body">
+         <form method="POST" action="/add/comments">
+        @csrf            
+           <p>{{$datas->title}}</p>
+           <p>{{$datas->description}}</p>
+           <h3>Add comment here</h3>
+      <input type="hidden" name="post" value="{{$datas->id}}" required/>
+      <input type="hidden" name="user" value="{{$datas->id}}" required/>
+      <textarea name="comments" placeholder="comment here" required></textarea><hr/>
+   <button class="btn btn-info" name="publish" required>publish</button>
+  
+</div>
+    </div>
+    </div>
+  <h3 class="text-muted">Previous Comment</h3>
+  <p class="text-success">{{$comments->comments}}</p>
+<a href="/comment-index" class="text-muted">All Comments</a>
+</form>
+@endsection    
 </body>
 </html>

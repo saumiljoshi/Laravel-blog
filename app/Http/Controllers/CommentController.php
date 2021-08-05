@@ -14,11 +14,9 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $comment = Comment::all();
-
-        return view('comment-index', ['comment'=>$comment]);
-   
+    { 
+        $comment = Comment::paginate(5);
+        return view('/comment-index',['comment' => $comment]);
     }
 
     /**
@@ -26,10 +24,14 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($posts)
     {
-        $data = Post::find($id); 
-        return view('comments',['data' => $data]);
+       
+        $data = Post::all();           
+        $comment = Comment::all();
+        return view('comments',compact('data', 'comment')); 
+   
+       
        
     }
 

@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Models\User;
+use App\Models\Comment;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,37 +43,44 @@ Route::get('home',[PostController::class,'post']);
 Route::middleware(['auth'])->group(function()
 {
     //show user profile;
-    Route::get('/index', [PostController::class,'index']);
-    Route::get('/category/edit/{edit}',[CategoryController::class,'edit']);
-    Route::post('/update/category/{category}',[CategoryController::class,'update']);
+    Route::get('/index/{posts}', [PostController::class,'index']);
+    //category section;
+    Route::view('category','category.category');
+    Route::post('add/category',[CategoryController::class,'store']);
 
-    Route::get('/profile',[AuthController::class,'index']);
-     
+    //edit category;
+    Route::get('category/{edit}',[CategoryController::class,'edit']);
+
+    Route::post('update/{category}',[CategoryController::class,'update']);
+
+    //user-information;
+    Route::get('user/{users}/posts',[AuthController::class,'profile']);
+    Route::get('/posts/{id}',[AuthController::class,'posts']); 
     //create new post;
     Route::get('new-post',[PostController::class,'create']);
     
     //store new post;
-    Route::post('new-post',[PostController::class,'store']);
+    Route::post('/new-post',[PostController::class,'store']);
     //show all posts;
     Route::get('show',[PostController::class,'show']);
     //edit all posts;
-    Route::get('posts/edit/{edit}',[PostController::class,'edit']);
+    Route::get('edit/{edit}',[PostController::class,'edit']);
     
-    Route::post('/update/posts/{post}',[PostController::class,'update']);   
+    Route::post('update/posts/{id}',[PostController::class,'update']);   
     //remove posts;
     Route::get('posts/delete/{delete}',[PostController::class,'destroy']);
     
-    //comments section 
-    Route::get('comment/posts/{id}',[CommentController::class,'create']);
-    
+    //comments section
+    Route::get('comment/{posts}',[CommentController::class,'create'])->name('comments');
+   
     // show comments on posts 
-    Route::get('comment-index',[CommentController::class,'index'])->name('comments');
+   Route::get('/comment-index',[CommentController::class,'index']);
     
     //add comments section 
-    Route::post('/add/user',[CommentController::class,'store']);
+    Route::post('add/comments',[CommentController::class,'store']);
 
     //remove comments section 
-    Route::get('comments/delete/{delete}',[CommentController::class,'destroy']);
+    Route::get('comments/{delete}',[CommentController::class,'destroy']);
 });
 
 

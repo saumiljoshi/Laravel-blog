@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $data = Category::all();
-       return view('category', ['data' => $data]);
+   
     }
 
     /**
@@ -24,8 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $input = Category::all();
-        
+        //
     }
 
     /**
@@ -36,12 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       $input['name'] = $request->name;
-       
-       $input['description'] = $request->description;
-      
-       Category::create($input);
-       return back();
+        //
     }
 
     /**
@@ -63,8 +56,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = Category::find($id);
-        return view('category',['data' => $data]);
+        //
     }
 
     /**
@@ -74,13 +66,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-
-    $category->name = $request->get('name');
-    $category->description = $request->get('description');
-    $category->save();
-    return redirect('/home');
+        //
     }
 
     /**
