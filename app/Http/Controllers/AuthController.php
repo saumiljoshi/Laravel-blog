@@ -13,43 +13,36 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
  
-    public function __construct()
-    {
-      // $this->middleware('guest');
-    }  
+      public function __construct()
+      {
+      
+      }  
 
-    public function login(){
+      public function login()
+      {
+          return view('Auth/login');
+      }
 
-      return view('Auth/login');
-    }
-    public function Session(Request $request)
-    {
-      $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+      public function Session(Request $request)
+      {
+        $credentials = $request->validate([
+          'email' => ['required', 'email'],
+          'password' => ['required'],
+        ]);
   
-    if (Auth::attempt($credentials)) 
-    {
-        $request->session()->regenerate();
+        if(Auth::attempt($credentials)) 
+        {
+          $request->session()->regenerate();
 
-        return redirect('/home');
-    }
-          //  return response()->json([
-          //   'message' => 'invalid credentials'
-          //  ],401);
-        // else
-        // {
-           // return route('home');
-        // 
-    //if(auth()->check() && auth()->user()->is_admin == 1) 
-        //(auth()->user()->is_admin)
-       
-    }  
-    public function register()
-    {
+          return redirect('/home');
+        }
+          
+      }
+
+      public function register()
+      {
           return view('auth/register');
-    }
+      }
 
       public function create(User_request $request)
       {
@@ -61,31 +54,33 @@ class AuthController extends Controller
     
       }
 
-        public function logout()
+      public function logout()
         {
               Auth::logout();
               return redirect('/');
         }
          
-        public function index()
+      public function index()
         {
           $user = User::all();
           return view('/profile',['user'=>$user]);
-        } 
-        public function profile(Request $request,$id)
-        {
-          //$user = User::all();
-          if(Auth::user()->is_admin())
-          {
-            $post = Post::all();  
-          }
-         else
-           {
-             $post = Post::where('user_id', 'user');    
-           }                          
-           return view('admin.profile', compact('post'));
         }
-        public function posts($id)
+        
+      public function profile(Request $request,$id)
+        {
+          
+             if(Auth::user()->is_admin())
+              {
+                $post = Post::all();  
+              }
+             else
+             {
+               $post = Post::where('user_id', 'user');    
+             }                          
+             return view('admin.profile', compact('post'));
+        }
+        
+      public function posts($id)
         {
 
           $post = Post::all(); 

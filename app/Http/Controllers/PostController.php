@@ -18,14 +18,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index(Post $key)
+    public function index()
     {
 
         //
-        $user = Auth::user();
-        //$title = 'Latest posts';
-        $post = Post::all();
-       return view('profile',compact('user','key'));
+        
     }
 
     /**
@@ -86,9 +83,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-
         $data = Post::find($id);
-        return view('Post.edit',compact('data'));
+        $category = Category::all();
+        return view('Post.edit',compact('data','category'));
     }
 
     /**
@@ -100,13 +97,13 @@ class PostController extends Controller
      */
     public function update(Request $request,Post $post)
     {
-           
-             $post->title = $request->get('title');
-             $post->description = $request->get('description');
-             $post->categories = $request->get('categories');
-             $post->user_id = $request->get('user_id');
 
-             $post->update();
+             $input['title'] = $request->input('title');
+             $input['description'] = $request->input('description');
+             $input['categories'] = $request->input('categories');
+             $input['user_id'] = $request->user()->id;
+
+             $post->update($input);
             
              return redirect('/home');
               
@@ -121,7 +118,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+    
         $post = Post::find($id);
         $post->delete();
         return redirect('/home');
