@@ -24,18 +24,14 @@ class PostEdited extends FormRequest
     public function rules()
     {
             return[
-                'title'=> [
-                  'required'
-                ],
-                'description' =>[
-                    'required'
-                ],
-                'categories' =>[
-                    'required'
-                ],
-                'user_id' =>[
-                    'required'
-                ],
+                 'title' => 'required',
+
+                 'description' => 'required',
+
+                 'categories' => 'required',
+
+                 'user_id' => 'required',
+            
             ];
     }
 }

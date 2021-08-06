@@ -15,7 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     { 
-        $comment = Comment::paginate(5);
+        $comment = Comment::all();
         return view('/comment-index',['comment' => $comment]);
     }
 
@@ -27,9 +27,9 @@ class CommentController extends Controller
     public function create($posts)
     {
        
-        $data = Post::all();           
+        $post = Post::find($posts);           
         $comment = Comment::all();
-        return view('comments',compact('data', 'comment')); 
+        return view('comments',compact('post', 'comment')); 
    
        
        

@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function()
     
     Route::post('update/posts/{id}',[PostController::class,'update']);   
     //remove posts;
-    Route::get('posts/delete/{delete}',[PostController::class,'destroy']);
+    Route::get('delete/{delete}',[PostController::class,'destroy']);
     
     //comments section
     Route::get('comment/{posts}',[CommentController::class,'create'])->name('comments');

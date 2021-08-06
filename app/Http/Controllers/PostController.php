@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Store;
-use App\Http\Requests\PostEdited;
 use Illuminate\Support\Str;
+use App\Http\Requests\PostEdited;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -69,7 +69,7 @@ class PostController extends Controller
        $post = Post::all();
        $user = User::all();
 
-       return view('home','layouts.app',compact('post','user'));
+       return view('home',compact('post','user'));
     
     }
    
@@ -86,10 +86,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //$post = Auth::user('id');
+
         $data = Post::find($id);
-        $category = Category::all();
-        return view('Post.edit',compact('data', 'category'));
+        return view('Post.edit',compact('data'));
     }
 
     /**
@@ -99,13 +98,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostEdited $request,Post $posts)
+    public function update(Request $request,Post $post)
     {
-        $data = $request->validated();
-        
-        $posts->save($data);
-        dd($posts);
-        return redirect('/home');      
+           
+             $post->title = $request->get('title');
+             $post->description = $request->get('description');
+             $post->categories = $request->get('categories');
+             $post->user_id = $request->get('user_id');
+
+             $post->update();
+            
+             return redirect('/home');
+              
     }
     
 
