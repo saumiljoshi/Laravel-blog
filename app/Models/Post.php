@@ -12,7 +12,7 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
     protected $fillable = [
-        'categories',
+        'categories_id',
         'user_id',
         'title',
         'description',

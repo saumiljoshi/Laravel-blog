@@ -28,7 +28,7 @@ class PostEdited extends FormRequest
 
                  'description' => 'required',
 
-                 'categories' => 'required',
+                 'categories_id' => 'required',
 
                  'user_id' => 'required',
             

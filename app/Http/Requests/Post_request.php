@@ -24,10 +24,10 @@ class Post_request extends FormRequest
     public function rules()
     {
             return [
-                'user' => [
+                'user_id' => [
                     'required'
                 ],
-                'post' => [
+                'post_id' => [
                   'required'
               ],
               'comments' => [

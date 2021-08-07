@@ -2,16 +2,10 @@
 @section('title')
 @endsection
 @section('content')
-@foreach($comment as $comments)
-
-@endforeach
 
 
-@if($comments->user == Auth::user()->id)
-<h5>all comments</h5>
-<p>
-{{$comments->comments}}</p>
-@endif
+
+
 <h3 class="text-center">User Profile</h3>
 <div class="text-center">
     <div class="card">
@@ -27,7 +21,7 @@
             @foreach($post as $posts)
             @if($posts->user_id == Auth::user()->id)
        <td>{{$posts->title}}<p class="text-muted">{{$posts->description}}</p></td>
-       <td>{{$posts->categories}}</td>
+       <td>{{$posts->categories_id}}</td>
 </tr>
 </tbody>
 @endif
@@ -35,5 +29,11 @@
     </table>
     </div>
 </div>
+{{-- @foreach($comment as $comments)
+
+@endforeach
+<h5 class="text-muted">Comments</h5>
+<p>
+{{$comments->comments}}</p> --}}
 
 @endsection  

@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-      return DB::table('posts')->insert([
-            'title' =>'books',
-            'description'=>'hey, i bought new books',
+      return DB::table('categories')->insert([
+            'name' =>'politics',
+            'description'=>'politics',
         ]);
     }
 }

@@ -17,7 +17,7 @@
      <tr class="text-center">
         <td>{{$posts->user_id}}</td>
         <td>{{$posts->description}}</td>
-        <td>{{$posts->categories}}</td>
+        <td>{{$posts->categories_id}}</td>
   </tr>
   @endforeach
 </table>

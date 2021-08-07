@@ -13,7 +13,8 @@
   <h5 class="card-title">Add New Post</h5>
   <form action="/new-post" method="POST" class="table table table-striped table py-3">
   @csrf
-  <input type="hidden" name="categories" value="{{$categories->id}}" required />
+  <input type="hidden" name="categories_id" value="{{$categories->id}}" required />
+  
   <div class="form-group py-3">
     <input required="required" placeholder="Enter title here" type="text" name="title" class="form-control" />
   </div>

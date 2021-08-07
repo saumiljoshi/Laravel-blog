@@ -71,13 +71,13 @@ Route::middleware(['auth'])->group(function()
     Route::get('/delete/{delete}',[PostController::class,'destroy']);
     
     //comments section
-    Route::get('comment/{posts}',[CommentController::class,'create'])->name('comments');
+    Route::get('comment/{id}',[CommentController::class,'create'])->name('comments');
    
     // show comments on posts 
    Route::get('/comment-index',[CommentController::class,'index']);
     
     //add comments section 
-    Route::post('add/comments',[CommentController::class,'store']);
+    Route::post('/add/comments',[CommentController::class,'store']);
 
     //remove comments section 
     Route::get('comments/{delete}',[CommentController::class,'destroy']);

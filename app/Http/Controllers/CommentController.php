@@ -24,12 +24,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($posts)
-    {
-       
-        $post = Post::find($posts);           
+    public function create($id)
+    {   
+        
+        $posts = Post::find($id);
         $comment = Comment::all();
-        return view('comments',compact('post', 'comment')); 
+        return view('comments',compact('posts', 'comment')); 
    
        
        
@@ -44,12 +44,16 @@ class CommentController extends Controller
     public function store(Post_request $request)
     {
        $data = $request->validated();
-     
-       $input['post'] = $request->input('post');
-       $input['user'] = $request->user()->id;
+
+     //dd($data);
+       $input['post_id'] = $request->input('post_id');
+       $input['user_id'] = $request->input('user_id');
        $input['comments'] = $request->input('comments');
+
        Comment::create($input);
+      
        return back();
+      
     }
 
     /**

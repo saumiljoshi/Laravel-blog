@@ -15,10 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-                 'name' => 'politics',
-                 'description' => 'its a politics category',
-        ]);
+        DB::table('users')->insert([
+                 'name' => 'saumil joshi',
+                 'email' => 'saumil@gmail.com',
+                 'password' => Hash::make('qwerty123'),
+                 'phone_no' => '329472394',
+                 'address' => 'Bhavnagar',
+                 'city' => 'Bhavnagar',
+                 'state' => 'gujarat',
+                 'zip' => '1246',
+                 'role' => 'admin', 
+                ]);
     }
  
 }

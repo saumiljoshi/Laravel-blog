@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\PostCreate;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Store;
 use Illuminate\Support\Str;
 use App\Http\Requests\PostEdited;
 use Illuminate\Http\Request;
@@ -42,16 +43,17 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Store $request)
+    public function store(PostCreate $request)
     {
         $data = $request->validated();
-        
+
         $post = new Post();
-        $post->categories = $request->get('categories');
+        $post->categories_id = $request->get('categories_id');
         $post->title = $request->get('title');
         $post->description = $request->get('description');
         $post->user_id = $request->user()->id;
-        $post->save();
+
+        $post->save($data);
         return redirect('/home'); 
     }
 
@@ -84,8 +86,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        $category = Category::all();
-        return view('Post.edit',compact('data','category'));
+        return view('Post.edit',compact('data'));
     }
 
     /**
@@ -97,14 +98,15 @@ class PostController extends Controller
      */
     public function update(Request $request,Post $post)
     {
-
-             $input['title'] = $request->input('title');
-             $input['description'] = $request->input('description');
-             $input['categories'] = $request->input('categories');
-             $input['user_id'] = $request->user()->id;
-
-             $post->update($input);
+       
             
+             $post->categories_id = $request->get('categories_id');
+             $post->user_id = $request->user()->id;
+             $post->title = $request->get('title');
+             $post->description = $request->get('description');
+             
+             $post->update();
+
              return redirect('/home');
               
     }
