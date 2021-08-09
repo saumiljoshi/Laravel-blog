@@ -16,7 +16,7 @@
   @foreach($comment as $data)
   <tbody>
   <tr> 
-  <td>{{$data->post}}</td>
+  <td>{{$data->post_id}}</td>
    <td>{{$data->comments}}<li>{{$data->created_at->format('M d,Y \a\t h:i a')}}<a href="{{'comments/'.$data->id}}">delete comments</a></li></td>
    @endforeach
 </tr>

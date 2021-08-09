@@ -12,9 +12,9 @@
                 @csrf 
                 
  
-                 <p>{{$posts->title}}</p>
-                 <p>{{$posts->description}}</p>           
-                 
+                 <p><b>{{$posts->title}}</b></p>
+                 <p><b>{{$posts->description}}</b></p>           
+                 <p class="text-muted">Published on: {{$posts->created_at->format('M d,Y \a\t h:i a')}}</p>
                 <h3>Add comment here</h3>
                  <input type="hidden" name="post_id" value="{{$posts->id}}" required/>
 

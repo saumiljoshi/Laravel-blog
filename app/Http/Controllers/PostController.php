@@ -86,8 +86,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        $category = Category::all();
-        return view('Post.edit',compact('data','category'));
+        // $category = Category::all();
+        return view('Post.edit',compact('data'));
     }
 
     /**
@@ -100,12 +100,22 @@ class PostController extends Controller
     public function update(Request $request,Post $post)
     {
           
-           $post->categories_id = $request->get('categories_id');
-           $post->user_id = $request->get('user_id');
-           $post->title = $request->get('title');
-           $post->description = $request->get('description');
+        $data = $request->validate(
+            [
+                'categories_id' => 'required',
+                'user_id' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+                ]
+        );
+     
+        //    $post->categories_id = $request->get('categories_id');
+        //    $post->user_id = $request->get('user_id');
+        //    $post->title = $request->get('title');
+        //    $post->description = $request->get('description');
 
-           $post->update();
+           $post->save($data);
+           dd($post);
            return redirect('/home');
               
     }
