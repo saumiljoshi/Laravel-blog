@@ -97,25 +97,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Post $post)
+    public function update(PostEdited $request,Post $post)
     {
           
-        $data = $request->validate(
-            [
-                'categories_id' => 'required',
-                'user_id' => 'required',
-                'title' => 'required',
-                'description' => 'required',
-                ]
-        );
-     
-        //    $post->categories_id = $request->get('categories_id');
-        //    $post->user_id = $request->get('user_id');
-        //    $post->title = $request->get('title');
-        //    $post->description = $request->get('description');
+           $data = $request->validated();
+   
+           $post->update($data);
 
-           $post->save($data);
-           dd($post);
            return redirect('/home');
               
     }
