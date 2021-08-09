@@ -86,7 +86,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        return view('Post.edit',compact('data'));
+        $category = Category::all();
+        return view('Post.edit',compact('data','category'));
     }
 
     /**
@@ -98,12 +99,14 @@ class PostController extends Controller
      */
     public function update(PostEdited $request,Post $post)
     {
-            $data = $request->validated(); 
-            
-             
-            $post->update($data);
+          
+           $post->categories_id = $request->get('categories_id');
+           $post->user_id = $request->get('user_id');
+           $post->title = $request->get('title');
+           $post->description = $request->get('description');
 
-             return redirect('/home');
+           $post->update();
+           return redirect('/home');
               
     }
     

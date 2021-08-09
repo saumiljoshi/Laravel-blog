@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Validation\Rule;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostEdited extends FormRequest
@@ -23,15 +23,21 @@ class PostEdited extends FormRequest
      */
     public function rules()
     {
-            return[
-                 'title' => 'required',
-
-                 'description' => 'required',
-
-                 'categories_id' => 'required',
-
-                 'user_id' => 'required',
-            
-            ];
+        return [
+            'categories_id'=>[
+                'required'
+            ],
+            'user_id'=>
+            [
+                'required'
+            ],
+            'title'=>
+            [
+                'required'
+            ],
+            'description'=>[
+                'required'
+            ],
+        ];
     }
 }

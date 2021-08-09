@@ -3,15 +3,17 @@
 @endsection
 @section('content')
   <body>
-    
- 
+    @foreach($category as $categories)
+
+   @endforeach
   <div class="d-flex flex-column justify-content-center mx-auto w-25">
 
       <div class="card" style="width: 30rem;">
         <div class="card-body">
           <form method="POST" action="{{'/update/posts/'.$data->id}}">
             @csrf
-            <input type="hidden" name="categories_id" value="{{$data->categories_id}}" required/>
+            <input type="hidden" name="categories_id" value="{{$categories->id}}" required/>
+           
             <input type="hidden" name="user_id" value="{{$data->user_id}}" required/>
           <div class="form-group py-3">
             <label>Title</label>
