@@ -16,7 +16,7 @@
 {{-- <div class="list-group-item"><p>{{$posts->title}}</p></div> --}}
      <tr class="text-center">
         <td>{{$posts->user_id}}</td>
-        <td>{{$posts->description}}</td>
+        <td>{{$posts->title}}<p class="text-muted">{{$posts->description}}</p></td>
         <td>{{$posts->categories_id}}</td>
   </tr>
   @endforeach
