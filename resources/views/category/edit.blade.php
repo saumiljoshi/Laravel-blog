@@ -11,10 +11,11 @@
 </head>
 <body>
   <div class="d-flex flex-column justify-content-center mx-auto w-25">
+    <h5 class="text-muted content-center mx-auto w-10">Category-Section</h5>
     <div class="card" style="width: 30rem;">
-      <h5 class="card-title">Category-section</h5>
       <div class="card-body">
-    <form method="POST" action="{{'/update/'.$data->id}}">
+    <form method="POST" action="/category/{{$data->id}}">
+      @method('PUT')
         @csrf
         <table class="table table table-striped table">
       <div class="form-group">

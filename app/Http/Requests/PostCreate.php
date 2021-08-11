@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PostCreate extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,13 +24,16 @@ class PostCreate extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'categories_id'=>[
+                'required'
+            ],
+            'user_id'=>[
                 'required'
             ],
             'title'=>[
                 'required',
-                Rule::unique('posts'),
+                Rule::unique('posts')
             ],
             'description'=>[
                 'required'
@@ -37,6 +41,5 @@ class PostCreate extends FormRequest
 
         ];
 
-        return $rules;
     }
 }

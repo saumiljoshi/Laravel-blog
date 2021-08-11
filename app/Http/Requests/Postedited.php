@@ -24,7 +24,7 @@ class PostEdited extends FormRequest
     public function rules()
     {
         return [
-            'categories_id'=>[
+            'category_id'=>[
                 'required'
             ],
             'user_id'=>
@@ -35,7 +35,8 @@ class PostEdited extends FormRequest
             [
                 'required'
             ],
-            'description'=>[
+            'description'=>
+            [
                 'required'
             ],
         ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Category;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User_request;
@@ -77,14 +78,20 @@ class AuthController extends Controller
              {
                $post = Post::where('user_id', 'user');    
              }                          
+
              return view('admin.profile', compact('post'));
         }
         
       public function posts($id)
         {
 
-          $post = Post::all(); 
-          $comment = Comment::all(); 
-          return view('user.Userprofile',compact('post','comment'));
+          $post = Post::all();
+          
+          if(Auth::user()->id)
+          {
+            $comment = Comment::all(); 
+            $categories = Category::all(); 
+          }  
+          return view('user.Userprofile',compact('post','comment','categories'));
         }
 }

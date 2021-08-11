@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post_request;
 use App\Http\Requests\PostCreate;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -23,6 +24,10 @@ class PostController extends Controller
     {
 
         //
+        $post = Post::all();
+        $user = User::all();
+ 
+        return view('home',compact('post','user'));
         
     }
 
@@ -33,8 +38,9 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {   
-       $category = Category::all();
-       return view('Post.create',['category' => $category]);
+       $categories = Category::all();
+       $users = User::all();
+       return view('post.create',compact('categories','users'));
     }
 
     /**
@@ -45,16 +51,13 @@ class PostController extends Controller
      */
     public function store(PostCreate $request)
     {
-        $data = $request->validated();
+         $data = $request->validated();
+        
+         Post::create($data);
+         
+   
+     return redirect('/home'); 
 
-        $post = new Post();
-        $post->categories_id = $request->get('categories_id');
-        $post->title = $request->get('title');
-        $post->description = $request->get('description');
-        $post->user_id = $request->user()->id;
-
-        $post->save($data);
-        return redirect('/home'); 
     }
 
     /**
@@ -63,18 +66,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function post()
-    {
-       $post = Post::all();
-       $user = User::all();
-
-       return view('home',compact('post','user'));
-    
-    }
    
-    public function show($id)
+    public function show()
     {
-        dd($id);
+       
     }
 
     /**
@@ -85,9 +80,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        
         $data = Post::find($id);
-        // $category = Category::all();
-        return view('Post.edit',compact('data'));
+        $categories = Category::all();
+        return view('post.edit',compact('data','categories'));
     }
 
     /**
@@ -97,13 +93,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostEdited $request,Post $post)
+    public function update(PostEdited $request,$id)
     {
-          
            $data = $request->validated();
-   
-           $post->update($data);
-
+    
+           $post = Post::find($id);
+          
+           $post->update($data);       
            return redirect('/home');
               
     }

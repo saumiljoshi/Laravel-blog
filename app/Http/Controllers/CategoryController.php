@@ -13,8 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $data = Category::all();
-       return view('category', ['data' => $data]);
+       $category = Category::all();
+       return view('category.list', ['category' => $category]);
     }
 
     /**
@@ -25,6 +25,7 @@ class CategoryController extends Controller
     public function create()
     {
         $input = Category::all();
+        return view('category.create', ['input' => $input]);
         
     }
 
@@ -36,12 +37,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+    
        $input['name'] = $request->name;
        
        $input['description'] = $request->description;
       
        Category::create($input);
-       return back();
+       return redirect('/category');
     }
 
     /**
@@ -64,7 +66,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = Category::find($id);
-        return view('category',['data' => $data]);
+        return view('category.edit',['data' => $data]);
     }
 
     /**
@@ -74,13 +76,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,$id)
     {
 
+    $category = Category::find($id);
     $category->name = $request->get('name');
     $category->description = $request->get('description');
     $category->save();
-    return redirect('/home');
+    return redirect('/category');
     }
 
     /**

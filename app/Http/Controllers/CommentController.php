@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Post_request;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,14 @@ class CommentController extends Controller
      */
     public function create($id)
     {   
-        
+
         $posts = Post::find($id);
-        $comment = Comment::all();
-        return view('comments',compact('posts', 'comment')); 
+        
+        if(Post::find($id))
+        {
+          $comments = Comment::all();
+        }  
+        return view('comment.create',compact('posts', 'comments')); 
    
        
        

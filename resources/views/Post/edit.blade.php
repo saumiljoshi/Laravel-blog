@@ -10,10 +10,15 @@
 
       <div class="card" style="width: 30rem;">
         <div class="card-body">
-          <form method="POST" action="{{'/update/posts/'.$data->id}}">
+          <form method="POST" action="/post/{{$data->id}}">
+            @method('PUT')
             @csrf
-            <input type="hidden" name="categories_id" value="{{$data->categories_id}}" required/>
-           
+            <select class="custom-select" name="category_id">
+              @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+              @endforeach
+            </select>
+            
             <input type="hidden" name="user_id" value="{{$data->user_id}}" required/>
           <div class="form-group py-3">
             <label>Title</label>

@@ -19,9 +19,12 @@
 <tbody>
         <tr>
             @foreach($post as $posts)
+             @foreach($categories as $category)
+             <p>{{$category->name}}</p>
+            @endforeach
             @if($posts->user_id == Auth::user()->id)
-       <td>{{$posts->title}}<p class="text-muted">{{$posts->description}}</p></td>
-       <td>{{$posts->categories_id}}</td>
+            
+            <td>{{$posts->title}}<p class="text-muted">{{$posts->description}}</p></td>
 </tr>
 </tbody>
 @endif

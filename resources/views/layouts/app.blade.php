@@ -35,7 +35,7 @@
        @else
          @if (Auth::user()->can_post())             
           <a class="nav-link" href="/posts/{{Auth::user()->name}}">{{ Auth::user()->name }}</a>  
-          <a class="nav-link" href="/new-post">Add new post</a>
+          <a class="nav-link" href="/post/create">Add new post</a>
           <a class="nav-link" href="/user/{{Auth::id().'/posts' }}">Admin-Section</a>  
           <a class="nav-link" href="{{ url('/logout') }}">logout</a>
             @endif  
